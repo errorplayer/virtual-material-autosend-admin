@@ -4,6 +4,10 @@ import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Product, ProductFormData } from '@/types/product';
 import ProductForm from './ProductForm';
+import { Inter } from 'next/font/google';
+
+// 引入字体
+const inter = Inter({ subsets: ['latin'] });
 
 interface ProductListProps {
   initialProducts: Product[];
@@ -70,12 +74,12 @@ export default function ProductList({ initialProducts }: ProductListProps) {
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className={`${inter.className} flex flex-col h-full bg-gray-100 p-6`}>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">商品列表</h2>
         <button
           onClick={handleAdd}
-          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+          className="bg-yellow-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-yellow-600 transition duration-300"
         >
           新增商品
         </button>
@@ -83,29 +87,29 @@ export default function ProductList({ initialProducts }: ProductListProps) {
 
       {/* 商品表格 */}
       <div className="overflow-auto flex-1">
-        <table className="min-w-full bg-white border rounded-lg">
-          <thead className="bg-gray-100">
+        <table className="min-w-full bg-white rounded-lg shadow-lg">
+          <thead className="bg-gray-200 border-b border-gray-300">
             <tr>
-              <th className="py-3 px-4 border-b text-left">商品名称</th>
-              <th className="py-3 px-4 border-b text-left">价格</th>
-              <th className="py-3 px-4 border-b text-left">库存</th>
-              <th className="py-3 px-4 border-b text-left">操作</th>
+              <th className="py-4 px-6 text-left text-gray-700">商品名称</th>
+              <th className="py-4 px-6 text-left text-gray-700">价格</th>
+              <th className="py-4 px-6 text-left text-gray-700">库存</th>
+              <th className="py-4 px-6 text-left text-gray-700">操作</th>
             </tr>
           </thead>
           <tbody>
-            {products.length === 0 ? (
+            {products.length === 0? (
               <tr>
-                <td colSpan={4} className="py-4 px-4 text-center text-gray-500">
+                <td colSpan={4} className="py-6 px-6 text-center text-gray-500">
                   暂无商品数据
                 </td>
               </tr>
             ) : (
               products.map((product) => (
-                <tr key={product.id} className="hover:bg-gray-50">
-                  <td className="py-3 px-4 border-b">{product.name}</td>
-                  <td className="py-3 px-4 border-b">¥{product.price.toFixed(2)}</td>
-                  <td className="py-3 px-4 border-b">{product.stock}</td>
-                  <td className="py-3 px-4 border-b">
+                <tr key={product.id} className="hover:bg-gray-100">
+                  <td className="py-4 px-6 border-b">{product.name}</td>
+                  <td className="py-4 px-6 border-b">¥{product.price.toFixed(2)}</td>
+                  <td className="py-4 px-6 border-b">{product.stock}</td>
+                  <td className="py-4 px-6 border-b">
                     <button
                       onClick={() => handleEdit(product)}
                       className="text-blue-600 hover:text-blue-800 mr-4"
@@ -131,7 +135,7 @@ export default function ProductList({ initialProducts }: ProductListProps) {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
             <h3 className="text-xl font-bold mb-4">
-              {editingProduct ? '编辑商品' : '新增商品'}
+              {editingProduct? '编辑商品' : '新增商品'}
             </h3>
             <ProductForm
               initialData={editingProduct}
