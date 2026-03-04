@@ -7,6 +7,7 @@ export interface Product {
   created_at: string;
   updated_at: string;
   coverImagePath: string;
+  resourceStorageUrl: string;  // 新增：资源文件路径
 }
 
 export interface ProductFormData {
@@ -15,4 +16,5 @@ export interface ProductFormData {
   stock: number;
   description: string;
   coverImagePath: string;
+  resourceStorageUrl: string;
 }

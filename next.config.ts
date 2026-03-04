@@ -34,7 +34,19 @@ const nextConfig: NextConfig = {
         hostname: 'p2.itc.cn',
         port: '',
         // pathname: '/it/u=*,*&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'
-      },]
+      },
+    {
+        protocol: 'https',
+        hostname: 'fyngzuhkdluhxqqybeuj.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/sign/product-resources/'
+      },
+    {
+        protocol: 'https',
+        hostname: 'q6.itc.cn',
+        port: '',
+        // pathname: '/storage/v1/object/sign/product-resources/'
+      }]
   }
 };
 
