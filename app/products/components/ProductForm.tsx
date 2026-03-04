@@ -15,6 +15,7 @@ export default function ProductForm({ initialData, onSave, onCancel }: ProductFo
     price: 0,
     stock: 0,
     description: '',
+    coverImagePath: '',
   });
 
   // 初始化编辑数据
@@ -25,6 +26,7 @@ export default function ProductForm({ initialData, onSave, onCancel }: ProductFo
         price: initialData.price,
         stock: initialData.stock,
         description: initialData.description || '',
+        coverImagePath: initialData.coverImagePath || '',
       });
     }
   }, [initialData]);
@@ -109,6 +111,20 @@ export default function ProductForm({ initialData, onSave, onCancel }: ProductFo
           id="description"
           name="description"
           value={formData.description}
+          onChange={handleChange}
+          rows={3}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div>
+        <label className="block text-gray-700 mb-1" htmlFor="coverImagePath">
+          封面图地址
+        </label>
+        <textarea
+          id="coverImagePath"
+          name="coverImagePath"
+          value={formData.coverImagePath}
           onChange={handleChange}
           rows={3}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"

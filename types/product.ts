@@ -6,6 +6,7 @@ export interface Product {
   description: string;
   created_at: string;
   updated_at: string;
+  coverImagePath: string;
 }
 
 export interface ProductFormData {
@@ -13,4 +14,5 @@ export interface ProductFormData {
   price: number;
   stock: number;
   description: string;
+  coverImagePath: string;
 }

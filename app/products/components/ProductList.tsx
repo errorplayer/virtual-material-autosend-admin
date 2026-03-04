@@ -5,6 +5,8 @@ import { supabase } from '@/lib/supabase';
 import { Product, ProductFormData } from '@/types/product';
 import ProductForm from './ProductForm';
 import { Inter } from 'next/font/google';
+import Image from 'next/image';
+
 
 // 引入字体
 const inter = Inter({ subsets: ['latin'] });
@@ -90,6 +92,7 @@ export default function ProductList({ initialProducts }: ProductListProps) {
         <table className="min-w-full bg-white rounded-lg shadow-lg">
           <thead className="bg-gray-200 border-b border-gray-300">
             <tr>
+              <th className="py-4 px-6 text-left text-gray-700">封面图片</th>
               <th className="py-4 px-6 text-left text-gray-700">商品名称</th>
               <th className="py-4 px-6 text-left text-gray-700">价格</th>
               <th className="py-4 px-6 text-left text-gray-700">库存</th>
@@ -106,6 +109,14 @@ export default function ProductList({ initialProducts }: ProductListProps) {
             ) : (
               products.map((product) => (
                 <tr key={product.id} className="hover:bg-gray-100">
+                  <td className="py-4 px-6 border-b">
+                            <Image
+                                src={product.coverImagePath}
+                                alt={product.name}
+                                width={100}
+                                height={100}
+                            />
+                        </td>
                   <td className="py-4 px-6 border-b">{product.name}</td>
                   <td className="py-4 px-6 border-b">¥{product.price.toFixed(2)}</td>
                   <td className="py-4 px-6 border-b">{product.stock}</td>
