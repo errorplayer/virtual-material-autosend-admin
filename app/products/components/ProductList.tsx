@@ -17,12 +17,12 @@ interface ProductListProps {
 
 export default function ProductList({ initialProducts }: ProductListProps) {
   const [products, setProducts] = useState<Product[]>(initialProducts);
-  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [editingProduct, setEditingProduct] = useState<Product | undefined>(undefined);
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   // 打开新增表单
   const handleAdd = () => {
-    setEditingProduct(null);
+    setEditingProduct(undefined);
     setIsFormOpen(true);
   };
 
@@ -62,7 +62,17 @@ export default function ProductList({ initialProducts }: ProductListProps) {
         alert('更新失败：返回数据为空');
         return;
       }
-      setProducts(products.map(p => p.id === editingProduct.id ? updated[0] : p));
+          // 合并更新后的数据与现有商品的图片路径
+      const updatedProduct: Product = {
+        ...updated[0],
+        description: updated[0].description || '',
+        created_at: updated[0].created_at || new Date().toISOString(),
+        updated_at: updated[0].updated_at || new Date().toISOString(),
+        coverImagePath: editingProduct.coverImagePath,
+        resourceStorageUrl: editingProduct.resourceStorageUrl,
+      };
+
+      setProducts(products.map(p => p.id === editingProduct.id ? updatedProduct : p));
     } else {
       // 新增商品
       const { data: newProduct, error } = await supabase
@@ -78,7 +88,16 @@ export default function ProductList({ initialProducts }: ProductListProps) {
         alert('新增失败：返回数据为空');
         return;
       }
-      setProducts([...products, newProduct[0]]);
+            // 使用表单数据确保包含所有必需字段
+      const addedProduct: Product = {
+        ...data,
+        id: newProduct[0].id,
+        description: newProduct[0].description || data.description || '',
+        created_at: newProduct[0].created_at || new Date().toISOString(),
+        updated_at: newProduct[0].updated_at || new Date().toISOString(),
+      };
+
+      setProducts([...products, addedProduct]);
     }
     setIsFormOpen(false);
   };

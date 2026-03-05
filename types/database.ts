@@ -16,29 +16,35 @@ export type Database = {
     Tables: {
       products: {
         Row: {
+          coverImagePath: string | null
           created_at: string | null
           description: string | null
           id: string
           name: string
           price: number
+          resourceStorageUrl: string | null
           stock: number
           updated_at: string | null
         }
         Insert: {
+          coverImagePath?: string | null
           created_at?: string | null
           description?: string | null
           id?: string
           name: string
           price: number
+          resourceStorageUrl?: string | null
           stock: number
           updated_at?: string | null
         }
         Update: {
+          coverImagePath?: string | null
           created_at?: string | null
           description?: string | null
           id?: string
           name?: string
           price?: number
+          resourceStorageUrl?: string | null
           stock?: number
           updated_at?: string | null
         }
