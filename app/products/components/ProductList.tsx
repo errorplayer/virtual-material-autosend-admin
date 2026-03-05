@@ -58,7 +58,11 @@ export default function ProductList({ initialProducts }: ProductListProps) {
         alert('更新失败：' + error.message);
         return;
       }
-      setProducts(products.map(p => p.id === editingProduct.id ? updated![0] : p));
+      if (!updated || updated.length === 0) {
+        alert('更新失败：返回数据为空');
+        return;
+      }
+      setProducts(products.map(p => p.id === editingProduct.id ? updated[0] : p));
     } else {
       // 新增商品
       const { data: newProduct, error } = await supabase
@@ -70,7 +74,11 @@ export default function ProductList({ initialProducts }: ProductListProps) {
         alert('新增失败：' + error.message);
         return;
       }
-      setProducts([...products, newProduct![0]]);
+      if (!newProduct || newProduct.length === 0) {
+        alert('新增失败：返回数据为空');
+        return;
+      }
+      setProducts([...products, newProduct[0]]);
     }
     setIsFormOpen(false);
   };
