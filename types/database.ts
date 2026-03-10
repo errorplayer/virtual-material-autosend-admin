@@ -14,6 +14,181 @@ export type Database = {
   }
   public: {
     Tables: {
+      order_deliveries: {
+        Row: {
+          channel: string
+          created_at: string
+          error_message: string | null
+          id: string
+          order_id: string
+          payload: Json
+          sent_at: string | null
+          status: string
+          target: string | null
+        }
+        Insert: {
+          channel?: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          order_id: string
+          payload?: Json
+          sent_at?: string | null
+          status?: string
+          target?: string | null
+        }
+        Update: {
+          channel?: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          order_id?: string
+          payload?: Json
+          sent_at?: string | null
+          status?: string
+          target?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_deliveries_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      order_events: {
+        Row: {
+          created_at: string
+          data: Json
+          id: string
+          order_id: string
+          type: string
+        }
+        Insert: {
+          created_at?: string
+          data?: Json
+          id?: string
+          order_id: string
+          type: string
+        }
+        Update: {
+          created_at?: string
+          data?: Json
+          id?: string
+          order_id?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_events_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      order_items: {
+        Row: {
+          created_at: string
+          id: string
+          line_total: number
+          order_id: string
+          product_id: string
+          product_name: string | null
+          quantity: number
+          resource_storage_url: string | null
+          unit_price: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          line_total: number
+          order_id: string
+          product_id: string
+          product_name?: string | null
+          quantity: number
+          resource_storage_url?: string | null
+          unit_price: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          line_total?: number
+          order_id?: string
+          product_id?: string
+          product_name?: string | null
+          quantity?: number
+          resource_storage_url?: string | null
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          created_at: string
+          currency: string
+          customer_contact: string | null
+          customer_name: string | null
+          discount_total: number
+          id: string
+          metadata: Json
+          note: string | null
+          order_no: string | null
+          status: string
+          subtotal: number
+          total_amount: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          currency?: string
+          customer_contact?: string | null
+          customer_name?: string | null
+          discount_total?: number
+          id?: string
+          metadata?: Json
+          note?: string | null
+          order_no?: string | null
+          status?: string
+          subtotal?: number
+          total_amount?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          customer_contact?: string | null
+          customer_name?: string | null
+          discount_total?: number
+          id?: string
+          metadata?: Json
+          note?: string | null
+          order_no?: string | null
+          status?: string
+          subtotal?: number
+          total_amount?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       products: {
         Row: {
           coverImagePath: string | null
